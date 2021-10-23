@@ -6,16 +6,16 @@ import { convertToRaw } from "draft-js"
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import { PostStatus, submitNewResponse } from "../../api/posts"
 import { getCurrentUser } from "../../api/users"
+import { capitalizeFirstLetter } from "../../utils/func"
 
-enum NewPostStatus  {
-    open = 'open',
-    replied = 'replied',
-    closed = 'closed',
-    solved = 'solved',
+enum NewPostStatus {
+  open = "open",
+  replied = "replied",
+  closed = "closed",
+  solved = "solved",
 }
 
-
-function NewResponse({ postId, close, isAdmin=false }) {
+function NewResponse({ postId, close }: { postId: string; close: () => void }) {
   const [editor, setEditor] = useState<EditorState>(() => null)
   const [error, setError] = useState<boolean>(() => false)
   const [errorMessage, setErrorMessage] = useState<string>(() => "")
@@ -30,9 +30,9 @@ function NewResponse({ postId, close, isAdmin=false }) {
       const res = await submitNewResponse({
         post_key: postId,
         content: JSON.stringify(convertToRaw(editor.getCurrentContent())),
-        status: "replied",
+        status: status ? status : PostStatus.replied,
       })
-      console.log("Response", res)
+      close()
     } catch (error) {
       setError(true)
       setErrorMessage(
@@ -73,18 +73,26 @@ function NewResponse({ postId, close, isAdmin=false }) {
                 editorClassName="form-control"
               />
             </Form.Group>
-           {type === 'staff' ?  <Col md={6} lg={4} xl={3}>
-              <Form.Group className="my-3" controlId="formBasicPassword">
-                <Form.Label>Change Status</Form.Label>
-                <Form.Select
-                  onChange={handleChangeStatus}
-                  value={status}
-                  aria-label="veryLow"
-                >
-                    {Object.keys(NewPostStatus).map(key => <option value={NewPostStatus[key]}>{key}</option>)}
-                </Form.Select>
-              </Form.Group>
-            </Col> : ''}
+            {type === "staff" ? (
+              <Col md={6} lg={4} xl={3}>
+                <Form.Group className="my-3" controlId="formBasicPassword">
+                  <Form.Label>Change Status</Form.Label>
+                  <Form.Select
+                    onChange={handleChangeStatus}
+                    value={status}
+                    aria-label="veryLow"
+                  >
+                    {Object.keys(NewPostStatus).map(key => (
+                      <option value={NewPostStatus[key]}>
+                        {capitalizeFirstLetter(key)}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            ) : (
+              ""
+            )}
             <Button className="mt-3" variant="primary" type="submit">
               Submit
             </Button>

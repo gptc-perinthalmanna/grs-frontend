@@ -83,5 +83,5 @@ export async function getPost(key: string) {
 }
 
 export async function submitNewResponse(data) {
-    return axios.post('/posts/response/new/')
+    return axios.post('/posts/response/new/', data)
 }
