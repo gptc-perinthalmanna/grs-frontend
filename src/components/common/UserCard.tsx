@@ -25,7 +25,7 @@ function UserCard({ userId }) {
     } else {
       setUser(errorUser)
     }
-  }, [])
+  }, [userId])
 
   React.useEffect(() => {
     getData()

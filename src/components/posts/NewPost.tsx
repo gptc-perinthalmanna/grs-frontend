@@ -4,7 +4,6 @@ import { Editor, EditorState } from "react-draft-wysiwyg"
 import { convertToRaw } from 'draft-js';
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import { submitNewPost } from "../../api/posts"
-import { getCurrentUser } from "../../api/users";
 
 function NewPostForm() {
   const [editor, setEditor] = useState<EditorState>(() => null)

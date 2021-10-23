@@ -85,3 +85,7 @@ export async function getPost(key: string) {
 export async function submitNewResponse(data) {
     return axios.post('/posts/response/new/', data)
 }
+
+export async function getMyPosts() {
+    return axios.get<Post[]>('/posts/me/')
+}
