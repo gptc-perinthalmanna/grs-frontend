@@ -1,0 +1,70 @@
+{
+  "name": "grs-gptc-perinthalmanna",
+  "private": true,
+  "description": "Government Polytechnic College Perinthalmanna is one of the leading institutions of its kind in Kerala.",
+  "version": "0.1.0",
+  "author": "Amjed Ali K <amjedmgm@gmail.com>",
+  "dependencies": {
+    "@tabler/core": "^1.0.0-beta3",
+    "@tabler/icons": "^1.41.2",
+    "@types/react-draft-wysiwyg": "^1.13.3",
+    "axios": "^0.23.0",
+    "date-fns": "^2.25.0",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "gatsby": "^4.0.0-zz-next.1",
+    "gatsby-plugin-image": "^2.0.0-zz-next.1",
+    "gatsby-plugin-manifest": "^4.0.0-zz-next.1",
+    "gatsby-plugin-offline": "^5.0.0-zz-next.1",
+    "gatsby-plugin-react-helmet": "^5.0.0-zz-next.1",
+    "gatsby-plugin-sass": "^5.0.0-alpha-9689ff.13",
+    "gatsby-plugin-sharp": "^4.0.0-zz-next.1",
+    "gatsby-source-filesystem": "^4.0.0-zz-next.1",
+    "gatsby-transformer-sharp": "^4.0.0-zz-next.1",
+    "jwt-decode": "^3.1.2",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-dom": "^17.0.1",
+    "react-draft-wysiwyg": "^1.14.7",
+    "react-helmet": "^6.1.0",
+    "sass": "^1.42.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "commitlint": "^11.0.0",
+    "commitlint-config-gitmoji": "^2.2.5",
+    "husky": "^7.0.2",
+    "prettier": "^2.3.2",
+    "pretty-quick": "^3.1.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "precommit": "npm pretty-quick --staged",
+    "pretty-quick": "pretty-quick",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amjed-ali-k/gptc-perinthalmanna"
+  },
+  "bugs": {
+    "url": "https://github.com/amjed-ali-k/gptc-perinthalmanna/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}
