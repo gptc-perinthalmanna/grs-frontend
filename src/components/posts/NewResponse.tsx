@@ -5,6 +5,7 @@ import { Editor, EditorState } from "react-draft-wysiwyg"
 import { convertToRaw } from "draft-js"
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import { PostStatus, submitNewResponse } from "../../api/posts"
+import { getCurrentUser } from "../../api/users"
 
 enum NewPostStatus  {
     open = 'open',

@@ -4,7 +4,7 @@
   </a>
 </p>
 
-This repo is made for unifying development of Government Polytechnic College, Perinthalmanna Official Website. `master` branch of this repo will be directly published to the primary url. 
+This repo is made for development of Grievance redressal system for Government Polytechnic College, Perinthalmanna. `master` branch of this repo will be directly published to the primary url. 
 
 ## 🏛️ About the institution
 Government Polytechnic College Perinthalmanna is one of the leading institutions of its kind in Kerala. Academically and otherwise its position in the state is unchallenged. Activities focusing on the result enhancement and the overall development of the students to make them excel in their respective fields are remarkable. The college has a rich tradition to look back. The present is praiseworthy, so the future has to be envisioned in the light of the glorious past and the meritorious present
@@ -38,15 +38,15 @@ The primary maintainers, though, are:
     Open the terminal / command prompt and paste the code below.
 
     ```shell
-    git clone https://github.com/amjed-ali-k/gptc-perinthalmanna.git
+    git clone https://github.com/amjed-ali-k/grs-frontend.git
     ```
 
-1.  **Start developing.**
+1.  **Start developing.**v
 
     Navigate into the cloned directory and start it up.
 
     ```shell
-    cd gptc-perinthalmanna/
+    cd grs-frontend/
     gatsby develop
     ```
 
@@ -59,10 +59,6 @@ The primary maintainers, though, are:
     Open the `gptc-perinthalmanna` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
 
 ## 🧔 Maintainers
-<a href="https://github.com/amjed-ali-k/gptc-perinthalmanna/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=amjed-ali-k/gptc-perinthalmanna" />
+<a href="https://github.com/amjed-ali-k/grs-frontend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=amjed-ali-k/grs-frontend" />
 </a>
-
-## 💼 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
