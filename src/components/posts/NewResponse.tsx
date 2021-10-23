@@ -15,7 +15,7 @@ enum NewPostStatus {
   solved = "solved",
 }
 
-function NewResponse({ postId, close }: { postId: string; close: () => void }) {
+function NewResponse({ postId, close, success}: { postId: string; close: () => void; success: (data: any) => void }) {
   const [editor, setEditor] = useState<EditorState>(() => null)
   const [error, setError] = useState<boolean>(() => false)
   const [errorMessage, setErrorMessage] = useState<string>(() => "")
@@ -27,11 +27,12 @@ function NewResponse({ postId, close }: { postId: string; close: () => void }) {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      const res = await submitNewResponse({
+      const {data} = await submitNewResponse({
         post_key: postId,
         content: JSON.stringify(convertToRaw(editor.getCurrentContent())),
         status: status ? status : PostStatus.replied,
       })
+      success(data)
       close()
     } catch (error) {
       setError(true)

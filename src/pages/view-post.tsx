@@ -10,6 +10,8 @@ import NewResponse from "../components/posts/NewResponse"
 import UserCard from "../components/common/UserCard"
 import { getPost, Post } from "../api/posts"
 
+const SkeltonLine = () => <div className="skeleton-line"></div>
+
 const ViewPostPage = ({ post_id = "c953d139585845f5957a75afc17fd690" }) => {
   const [post, setPost] = useState<Post>(() => null)
   const [newResponseShow, setNewResponseShow] = useState(false)
@@ -23,7 +25,7 @@ const ViewPostPage = ({ post_id = "c953d139585845f5957a75afc17fd690" }) => {
     fetchPost()
   }, [])
 
-  const SkeltonLine = () => <div className="skeleton-line"></div>
+  const handleNewResponseSuccess = e => fetchPost()
 
   const Skelton = () => (
     <>
@@ -43,15 +45,23 @@ const ViewPostPage = ({ post_id = "c953d139585845f5957a75afc17fd690" }) => {
           <Row className="align-items-center">
             <Col>
               <div className="page-pretitle">Grievance Cell</div>
-              <h2 className="page-title">View Grievance / {post_id}</h2>
+              <h2 className="page-title">
+                View Grievance / {post_id.slice(0, 5)}***{post_id.slice(-5)}
+              </h2>
             </Col>
             <Col className="col-auto ms-auto">
               <div className="btn-list">
-              <Button onClick={() => setNewResponseShow(true)} className="d-none d-sm-inline-block">
+                <Button
+                  onClick={() => setNewResponseShow(true)}
+                  className="d-none d-sm-inline-block"
+                >
                   <IconPlus />
                   New Response
                 </Button>
-                <Button onClick={() => setNewResponseShow(true)} className="d-sm-none btn-icon">
+                <Button
+                  onClick={() => setNewResponseShow(true)}
+                  className="d-sm-none btn-icon"
+                >
                   <IconPlus />
                 </Button>
                 <Button href="" className="d-none d-sm-inline-block">
@@ -66,7 +76,7 @@ const ViewPostPage = ({ post_id = "c953d139585845f5957a75afc17fd690" }) => {
           </Row>
         </div>
         <Row className="row-deck row-cards">
-          <Col lg="8">
+          <Col md="7" lg="8">
             <Row className="row-deck row-cards">
               <Col sm="12">
                 <Card>
@@ -84,20 +94,24 @@ const ViewPostPage = ({ post_id = "c953d139585845f5957a75afc17fd690" }) => {
                   </Card.Body>
                 </Card>
               </Col>
-              <Col sm="12" className={newResponseShow ? "": "d-none"}>
+              <Col sm="12" className={newResponseShow ? "" : "d-none"}>
                 <Card>
                   <Card.Body>
-                    <NewResponse postId={post_id} close={() => setNewResponseShow(false)} />
+                    <NewResponse
+                      postId={post_id}
+                      close={() => setNewResponseShow(false)}
+                      success={handleNewResponseSuccess}
+                    />
                   </Card.Body>
                 </Card>
               </Col>
-              
+
               {post &&
                 post.responses.map(response => {
                   let HrChange = () => <div></div>
                   if (response.statusChange.prev !== response.statusChange.to) {
                     HrChange = () => (
-                      <div className="hr-text">
+                      <div className="hr-text mt-3 mb-0">
                         <span>{`Status changed from ${response.statusChange.prev} to ${response.statusChange.to}`}</span>
                       </div>
                     )
@@ -119,25 +133,39 @@ const ViewPostPage = ({ post_id = "c953d139585845f5957a75afc17fd690" }) => {
                     </React.Fragment>
                   )
                 })}
-
-              
             </Row>
           </Col>
-          <Col lg="4">
+          <Col md="5" lg="4" className="h-100">
             <Card>
               <Card.Body>
                 <Row>
                   <Col sm="12">
+                    <h3>Id</h3>
+                    <p>{post_id}</p>
+                  </Col>
+                  <Col sm="12">
                     <h3>Status</h3>
-                    {post ? <p>{post.status.toUpperCase()}</p> : <SkeltonLine />}
+                    {post ? (
+                      <p>{post.status.toUpperCase()}</p>
+                    ) : (
+                      <SkeltonLine />
+                    )}
                   </Col>
                   <Col sm="12">
                     <h3>Priority</h3>
-                    {post ? <p>{post.priority.toUpperCase()}</p> : <SkeltonLine />}
+                    {post ? (
+                      <p>{post.priority.toUpperCase()}</p>
+                    ) : (
+                      <SkeltonLine />
+                    )}
                   </Col>
                   <Col sm="12">
                     <h3>Posted on</h3>
-                    {post ? <p>{format(parseJSON(post.published), 'p PPPP')}</p> : <SkeltonLine />}
+                    {post ? (
+                      <p>{format(parseJSON(post.published), "p PPPP")}</p>
+                    ) : (
+                      <SkeltonLine />
+                    )}
                   </Col>
                   <Col sm="12">
                     <h3>Posted by</h3>

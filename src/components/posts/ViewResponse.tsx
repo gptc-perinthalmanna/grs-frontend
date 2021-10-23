@@ -13,13 +13,9 @@ function ViewResponse({
   response: Response
   author: string
 }) {
-  const ref = useRef(null)
-  let html = draftToHtml(JSON.parse(response.content))
-  const [user, setUser] = React.useState<BasicUser>(null)
 
-  useEffect(() => {
-    ref.current.innerHTML = html
-  }, [])
+  const html = draftToHtml(JSON.parse(response.content))
+  const [user, setUser] = React.useState<BasicUser>(null)
 
   const getData = React.useCallback(async () => {
     getUserFromId(response.author)
@@ -52,7 +48,7 @@ function ViewResponse({
   return (
     <Row>
       <Col sm="12">
-        <div ref={ref}></div>
+        <div dangerouslySetInnerHTML={{__html: html}}></div>
       </Col>
       <Col>
         <div className="d-flex align-items-center">
