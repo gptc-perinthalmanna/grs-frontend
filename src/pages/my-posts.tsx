@@ -39,9 +39,12 @@ const MyPostsPage = () => {
             </Col>
             <Col className="col-auto ms-auto">
               <div className="btn-list">
-                <Link to="/new-post" className="d-none d-sm-inline-block">
+                <Link to="/new-post" >
+                    <Button className="d-none d-sm-inline-block">
                   <IconPlus />
                   New Grievance
+
+                    </Button>
                 </Link>
                 <Button className="d-sm-none btn-icon">
                   <IconPlus />
@@ -71,8 +74,11 @@ const MyPostsPage = () => {
                           </p>
                         </Col>
                         <Col>
+                        <Link to={`/posts/${post.key}/`} >
                           <h4>{post.subject}</h4>
+                        </Link>
                         </Col>
+                        
                         <Col xs="auto" className="cursor-pointer">
                           <IconDotsVertical />
                         </Col>
@@ -83,11 +89,11 @@ const MyPostsPage = () => {
                             {post.status}
                           </div>
                         </Col>
-                        <Col xs="auto">
+                        {post.responses && <Col xs="auto">
                           <div className="badge bg-green-lt text-capitalize">
-                            {post.responses.length} Responses
+                            {post.responses.length } Responses
                           </div>
-                        </Col>
+                        </Col>}
                         <Col xs="auto" className="text-muted">
                           <IconCalendarTime />
                           <span>
