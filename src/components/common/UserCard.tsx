@@ -1,6 +1,7 @@
 import React from "react"
 import { Row, Col } from "react-bootstrap"
 import { BasicUser, getUserFromId } from "../../api/users"
+import { capitalizeFirstLetter } from "../../utils/func"
 
 const errorUser: BasicUser = {
   key: "error_key",
@@ -63,8 +64,3 @@ function UserCard({ userId }) {
 }
 
 export default UserCard
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
