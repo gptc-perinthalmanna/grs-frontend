@@ -9,9 +9,11 @@ import draftToHtml from "draftjs-to-html"
 function ViewResponse({
   response,
   author,
+  change,
 }: {
   response: Response
   author: string
+  change: JSX.Element
 }) {
 
   const html = draftToHtml(JSON.parse(response.content))
@@ -50,6 +52,7 @@ function ViewResponse({
       <Col sm="12">
         <div dangerouslySetInnerHTML={{__html: html}}></div>
       </Col>
+      {change}
       <Col>
         <div className="d-flex align-items-center">
           {user ? (

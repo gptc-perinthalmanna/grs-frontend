@@ -1,5 +1,7 @@
 import axios from "axios"
 import jwt_decode from "jwt-decode"
+axios.defaults.baseURL = 'http://localhost:8001';
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 
 export type BasicUser = {
   key: string
@@ -32,14 +34,16 @@ export type User = {
 }
 
 type Login = {
-  access_token: string;
-  token_type: string;
+  access_token: string
+  token_type: string
 }
 
-export async function login(form:FormData) {
-  const {data: {access_token}} = await axios.post<Login>('/token', form)
-    localStorage.setItem('token', access_token)
-    return access_token
+export async function login(form: FormData) {
+  const {
+    data: { access_token },
+  } = await axios.post<Login>("/token", form)
+  localStorage.setItem("token", access_token)
+  return access_token
 }
 
 export async function getUserFromId(userid: string) {
@@ -58,4 +62,14 @@ export async function getUserFromId(userid: string) {
 export function getCurrentUser() {
   const token = localStorage.getItem("token")
   return token ? jwt_decode<User>(token) : null
+}
+
+export function logout() {
+  window.location.href = "/login"
+  localStorage.removeItem("token")
+}
+
+export async function register(form) {
+  console.log(form)
+  return await axios.post("/users/new", form)
 }

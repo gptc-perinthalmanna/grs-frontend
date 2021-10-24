@@ -102,8 +102,17 @@ const ViewPostPage = ({ params }) => {
                   let HrChange = () => <div></div>
                   if (response.statusChange.prev !== response.statusChange.to) {
                     HrChange = () => (
-                      <div className="hr-text mt-3 mb-0">
-                        <span>{`Status changed from ${response.statusChange.prev} to ${response.statusChange.to}`}</span>
+                      <div className="hr-text hr-text-right mt-1 mb-2">
+                        <span>
+                          Status changed from {" "}
+                          <span className="text-danger">
+                            {response.statusChange.prev}
+                          </span> {" "}
+                          to {" "}
+                          <span className="text-success">
+                            {response.statusChange.to}
+                          </span>
+                        </span>
                       </div>
                     )
                   }
@@ -115,12 +124,13 @@ const ViewPostPage = ({ params }) => {
                           <Card.Body>
                             <ViewResponses
                               response={response}
+                              change={<HrChange />}
                               author={post.author}
                             />
                           </Card.Body>
                         </Card>
                       </Col>
-                      <HrChange />
+                      {/* <HrChange /> */}
                     </React.Fragment>
                   )
                 })}

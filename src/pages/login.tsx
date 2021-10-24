@@ -1,4 +1,4 @@
-import { navigate } from "gatsby"
+import { Link, navigate } from "gatsby"
 import React, { useState } from "react"
 import { Card, Col, Form, Button, Container, Row, Alert } from "react-bootstrap"
 import { login } from "../api/users"
@@ -97,8 +97,13 @@ function loginPage() {
               </div>
             )}
           </Card>
-          <Row className="align-items-center mt-3">
-            <Col></Col>
+          <Row className="align-items-center justify-content-center mt-3">
+            <Col xs="auto">
+              <Link to="/register">Register new account</Link>
+            </Col>
+            <Col xs="auto">
+              <Link to="/register">Forgot Password</Link>
+            </Col>
           </Row>
         </Container>
       </div>

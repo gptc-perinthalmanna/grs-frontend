@@ -14,11 +14,11 @@ const NotFoundPage = () => (
         Try adjusting your search or filter to find what you're looking for.
       </p>
       <div class="empty-action">
-        <a href="/" class="btn btn-primary">
+        <a href="/login" class="btn btn-primary">
           <IconArrowLeft />
           Take me home
         </a>
-      </div>
+      </div>  
     </div>
   </Layout>
 )
