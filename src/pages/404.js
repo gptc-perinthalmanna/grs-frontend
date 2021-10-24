@@ -18,7 +18,7 @@ const NotFoundPage = () => (
           <IconArrowLeft />
           Take me home
         </a>
-      </div>  
+      </div>
     </div>
   </Layout>
 )

@@ -12,7 +12,6 @@ const IndexPage = () => (
     <Seo title="Home" />
     <Container fluid="xl" className="page-body">
       <Row className="row-deck row-cards">
-  
         {/* Mission */}
         <Col md="6" lg="3">
           <Card>

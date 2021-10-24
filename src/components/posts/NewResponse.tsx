@@ -15,7 +15,15 @@ enum NewPostStatus {
   solved = "solved",
 }
 
-function NewResponse({ postId, close, success}: { postId: string; close: () => void; success: (data: any) => void }) {
+function NewResponse({
+  postId,
+  close,
+  success,
+}: {
+  postId: string
+  close: () => void
+  success: (data: any) => void
+}) {
   const [editor, setEditor] = useState<EditorState>(() => null)
   const [error, setError] = useState<boolean>(() => false)
   const [errorMessage, setErrorMessage] = useState<string>(() => "")
@@ -27,7 +35,7 @@ function NewResponse({ postId, close, success}: { postId: string; close: () => v
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      const {data} = await submitNewResponse({
+      const { data } = await submitNewResponse({
         post_key: postId,
         content: JSON.stringify(convertToRaw(editor.getCurrentContent())),
         status: status ? status : PostStatus.replied,
@@ -68,12 +76,13 @@ function NewResponse({ postId, close, success}: { postId: string; close: () => v
             />
 
             <Form.Group className={"border-1"}>
-            {typeof window !== 'undefined' &&
-              <Editor
-                editorState={editor}
-                onEditorStateChange={handleEdit}
-                editorClassName="form-control"
-              />}
+              {typeof window !== "undefined" && (
+                <Editor
+                  editorState={editor}
+                  onEditorStateChange={handleEdit}
+                  editorClassName="form-control"
+                />
+              )}
             </Form.Group>
             {currentUser?.type === "staff" ? (
               <Col md={6} lg={4} xl={3}>

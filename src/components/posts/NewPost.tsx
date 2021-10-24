@@ -1,16 +1,16 @@
 import React, { FormEvent, useState } from "react"
 import { Form, Button, Col, Alert } from "react-bootstrap"
 import { Editor, EditorState } from "react-draft-wysiwyg"
-import { convertToRaw } from 'draft-js';
+import { convertToRaw } from "draft-js"
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import { submitNewPost } from "../../api/posts"
-import { navigate } from "gatsby";
+import { navigate } from "gatsby"
 
 function NewPostForm() {
   const [editor, setEditor] = useState<EditorState>(() => null)
   const [subject, setSubject] = useState<string>(() => null)
   const [checkbox, setCheckbox] = useState(() => false)
-  const [priority, setPriority] = useState<string>(() => 'veryLow')
+  const [priority, setPriority] = useState<string>(() => "veryLow")
   const [error, setError] = useState<boolean>(() => false)
   const [errorMessage, setErrorMessage] = useState<string>(() => "")
 
@@ -29,13 +29,13 @@ function NewPostForm() {
     console.log(`%c Subject ${subject} `, "color: green")
     console.log(`%c Priority ${priority} `, "color: green")
     try {
-      const {data} = await submitNewPost({
+      const { data } = await submitNewPost({
         subject,
         priority,
         content: JSON.stringify(convertToRaw(editor.getCurrentContent())),
       })
-      if (typeof window !== 'undefined') {
-        navigate(`/posts/${data['key']}`)
+      if (typeof window !== "undefined") {
+        navigate(`/posts/${data["key"]}`)
       }
     } catch (error) {
       setError(true)
@@ -48,8 +48,6 @@ function NewPostForm() {
   const handleChangePriority = e => {
     setPriority(e.target.value)
   }
-
-
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -80,12 +78,13 @@ function NewPostForm() {
       </Col>
 
       <Form.Group className={"border-1"}>
-      {typeof window !== 'undefined' &&
-        <Editor
-          editorState={editor}
-          onEditorStateChange={handleEdit}
-          editorClassName="form-control"
-        /> }
+        {typeof window !== "undefined" && (
+          <Editor
+            editorState={editor}
+            onEditorStateChange={handleEdit}
+            editorClassName="form-control"
+          />
+        )}
       </Form.Group>
 
       <Form.Group className="my-3" controlId="formBasicCheckbox">

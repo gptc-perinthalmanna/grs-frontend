@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Container, Row, Button } from "react-bootstrap"
-import {
-  IconList,
-  IconMoodSad,
-  IconPlus,
-} from "@tabler/icons"
+import { IconList, IconMoodSad, IconPlus } from "@tabler/icons"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import { adminRoles, getMyPosts, Post } from "../../api/posts"
@@ -54,15 +50,19 @@ const MyPostsPage = () => {
         <PageHeader
           title="Grievance Cell"
           preTitle="Dashboard"
-          SecondaryButton={isAdmin ? <Link to="/posts/all-posts">
-          <Button className="d-none d-sm-inline-block">
-            <IconList />
-            All Grievances
-          </Button>
-          <Button className="d-sm-none btn-icon">
-            <IconPlus />
-          </Button>
-        </Link> : null}
+          SecondaryButton={
+            isAdmin ? (
+              <Link to="/posts/all-posts">
+                <Button className="d-none d-sm-inline-block">
+                  <IconList />
+                  All Grievances
+                </Button>
+                <Button className="d-sm-none btn-icon">
+                  <IconPlus />
+                </Button>
+              </Link>
+            ) : null
+          }
           PrimaryButton={
             <Link to="/posts/new-post">
               <Button className="d-none btn-secondary d-sm-inline-block">
@@ -106,13 +106,14 @@ const MyPostsPage = () => {
           )}
           {!loadingMore && !posts && !loading && (
             <div className="text-center my-4">
-              <div className="text-center" >
-
-              <IconMoodSad style={{
-                      height: "100%",
-                      width: "100px",
-                      textAlign: "center",
-                    }} />
+              <div className="text-center">
+                <IconMoodSad
+                  style={{
+                    height: "100%",
+                    width: "100px",
+                    textAlign: "center",
+                  }}
+                />
               </div>
               <div>You don't created any Grievances yet.</div>
             </div>

@@ -31,7 +31,6 @@ function UserCard({ userId }) {
     getData()
   }, [])
 
-  
   if (!user) {
     return (
       <Row>
@@ -49,11 +48,16 @@ function UserCard({ userId }) {
   return (
     <Row className="align-items-center">
       <Col sm="auto">
-        <div className="avatar avatar-md avatar-rounded" style={{backgroundImage: `url(${user.avatar})`}} />
+        <div
+          className="avatar avatar-md avatar-rounded"
+          style={{ backgroundImage: `url(${user.avatar})` }}
+        />
       </Col>
       <Col>
         <Row>
-          <Col><strong>{`${user.first_name} ${user.last_name}`}</strong></Col>
+          <Col>
+            <strong>{`${user.first_name} ${user.last_name}`}</strong>
+          </Col>
         </Row>
         <Row>
           <Col>{capitalizeFirstLetter(user.type)}</Col>

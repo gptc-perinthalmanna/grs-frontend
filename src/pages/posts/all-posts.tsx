@@ -3,7 +3,13 @@ import { Container, Row, Col, Button } from "react-bootstrap"
 import { IconMoodSad, IconPlus } from "@tabler/icons"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
-import { adminRoles, getAllPosts, Post, PostPriority, PostStatus } from "../../api/posts"
+import {
+  adminRoles,
+  getAllPosts,
+  Post,
+  PostPriority,
+  PostStatus,
+} from "../../api/posts"
 import { Link, navigate } from "gatsby"
 import PageHeader from "../../components/PageHeader"
 import PostsList from "../../components/posts/PostsList"
@@ -15,7 +21,9 @@ interface PostQuery {
 }
 
 const AllPostsPage = () => {
-  useEffect(() => {adminRoles.includes(getCurrentUser()?.type) ? "" : navigate("/dashboard")}, [])
+  useEffect(() => {
+    adminRoles.includes(getCurrentUser()?.type) ? "" : navigate("/dashboard")
+  }, [])
 
   const [posts, setPosts] = useState<Post[]>(() => null)
   const [page, setPage] = useState<{
@@ -24,14 +32,17 @@ const AllPostsPage = () => {
   }>(null)
   const [loading, setLoading] = useState(false)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [filter, setFilter] = useState<PostQuery>({priority: null, status: null})
+  const [filter, setFilter] = useState<PostQuery>({
+    priority: null,
+    status: null,
+  })
 
   const fetchPosts = async (query: PostQuery = {}, key = null) => {
     setLoading(true)
     // Removing null value keys
     let _query = {}
-    if (query.priority) _query['priority'] = query.priority
-    if (query.status) _query['status'] = query.status
+    if (query.priority) _query["priority"] = query.priority
+    if (query.status) _query["status"] = query.status
 
     const { data } = await getAllPosts(_query, key)
     setPosts(data.posts)
@@ -57,12 +68,12 @@ const AllPostsPage = () => {
   }
 
   function handleFilterPriority(e) {
-    setFilter({...filter, priority: e})
+    setFilter({ ...filter, priority: e })
     fetchPosts(filter)
   }
 
   function handleFilterStatus(e) {
-    setFilter({...filter, status:e})
+    setFilter({ ...filter, status: e })
     fetchPosts(filter)
   }
 
@@ -131,7 +142,7 @@ const AllPostsPage = () => {
             <Button
               className="btn-sm btn-secondary"
               onClick={() => {
-                setFilter({priority: null, status: null})
+                setFilter({ priority: null, status: null })
                 fetchPosts()
               }}
             >
@@ -160,7 +171,13 @@ const AllPostsPage = () => {
               )}
 
               {page && page.lastKey && !loadingMore ? (
-                <Button className="mx-auto" style={{maxWidth: '300px'}} onClick={handleLoadMore}>Load More</Button>
+                <Button
+                  className="mx-auto"
+                  style={{ maxWidth: "300px" }}
+                  onClick={handleLoadMore}
+                >
+                  Load More
+                </Button>
               ) : null}
               {loadingMore && (
                 <div

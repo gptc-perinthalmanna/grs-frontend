@@ -1,9 +1,11 @@
 import axios from "axios"
 import jwt_decode from "jwt-decode"
-axios.defaults.baseURL = 'https://newgrs.deta.dev';
+axios.defaults.baseURL = "https://newgrs.deta.dev"
 // axios.defaults.baseURL = 'http://localhost:8001';
-if (typeof window !== 'undefined') {
-  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+if (typeof window !== "undefined") {
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.getItem("token")}`
 }
 
 export type BasicUser = {
@@ -46,7 +48,7 @@ export async function login(form: FormData) {
     data: { access_token },
   } = await axios.post<Login>("/token", form)
 
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     localStorage.setItem("token", access_token)
   }
   return access_token
@@ -66,8 +68,7 @@ export async function getUserFromId(userid: string) {
 }
 
 export function getCurrentUser() {
-  if (typeof window !== 'undefined') {
-   
+  if (typeof window !== "undefined") {
     const token = localStorage.getItem("token")
     return token ? jwt_decode<User>(token) : null
   }
@@ -76,15 +77,12 @@ export function getCurrentUser() {
 
 export function logout() {
   window.location.href = "/login"
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     localStorage.removeItem("token")
   }
-  
 }
 
 export async function register(form) {
   console.log(form)
   return await axios.post("/users/new/", form)
 }
-
-

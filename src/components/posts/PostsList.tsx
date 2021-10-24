@@ -1,10 +1,6 @@
 import React from "react"
 import { Row, Card, Col } from "react-bootstrap"
-import {
-  IconCalendarEvent,
-  IconCalendarTime,
-  IconUser,
-} from "@tabler/icons"
+import { IconCalendarEvent, IconCalendarTime, IconUser } from "@tabler/icons"
 import { format, parseJSON } from "date-fns"
 import { Link } from "gatsby"
 
@@ -65,7 +61,10 @@ function PostsList({ posts }) {
 
                     <Col xs="auto" className="text-muted">
                       <IconUser />
-                      <span className="text-capitalize"> {post.authorName}</span>
+                      <span className="text-capitalize">
+                        {" "}
+                        {post.authorName}
+                      </span>
                     </Col>
                   </Row>
                 </Card.Body>

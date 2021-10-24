@@ -33,13 +33,11 @@ const ViewPostPage = ({ params }) => {
 
   const handleNewResponseSuccess = e => fetchPost()
 
-  const handleDelete =  async() => {
+  const handleDelete = async () => {
     try {
-     const res = await deletePost(post_id)
-     navigate('/dashboard')
-    } catch (error) {
-      
-    }
+      const res = await deletePost(post_id)
+      navigate("/dashboard")
+    } catch (error) {}
   }
 
   const Skelton = () => (
@@ -205,7 +203,13 @@ const ViewPostPage = ({ params }) => {
                 <Col xs="12">
                   <Card>
                     <Card.Body>
-                      <Button onClick={handleDelete} className="btn-sm btn-danger" ><IconTrash />Delete this Grievance</Button>
+                      <Button
+                        onClick={handleDelete}
+                        className="btn-sm btn-danger"
+                      >
+                        <IconTrash />
+                        Delete this Grievance
+                      </Button>
                     </Card.Body>
                   </Card>
                 </Col>

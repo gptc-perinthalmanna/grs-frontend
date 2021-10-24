@@ -1,6 +1,4 @@
-import {
-  IconHeart,
-} from "@tabler/icons"
+import { IconHeart } from "@tabler/icons"
 import React from "react"
 import { Col, Container, Row } from "react-bootstrap"
 
@@ -8,7 +6,6 @@ const Footer = (): React.ReactElement => {
   return (
     <footer className="footer footer-dark d-print-none">
       <Container fluid="xl">
-     
         <Row className="text-center align-items-center mt-3">
           <Col className="col-12 col-lg-auto mt-3 mt-lg-0">
             <ul className="list-inline list-inline-dots mb-0">

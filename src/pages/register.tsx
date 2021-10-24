@@ -62,8 +62,8 @@ function registerPage() {
       await register(form)
       setRegisterd(true)
       setTimeout(() => {
-        navigate('/login')
-      }, 5000);
+        navigate("/login")
+      }, 5000)
     } catch ({ response }) {
       setShow(true)
       if (response && response.status === 422) {

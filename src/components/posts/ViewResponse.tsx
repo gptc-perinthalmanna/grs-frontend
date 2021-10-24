@@ -15,7 +15,6 @@ function ViewResponse({
   author: string
   change: JSX.Element
 }) {
-
   const html = draftToHtml(JSON.parse(response.content))
   const [user, setUser] = React.useState<BasicUser>(null)
 
@@ -48,7 +47,7 @@ function ViewResponse({
   return (
     <Row>
       <Col sm="12">
-        <div dangerouslySetInnerHTML={{__html: html}}></div>
+        <div dangerouslySetInnerHTML={{ __html: html }}></div>
       </Col>
       {change}
       <Col>

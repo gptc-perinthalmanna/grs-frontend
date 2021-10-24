@@ -4,13 +4,18 @@
   </a>
 </p>
 
-This repo is made for development of Grievance redressal system for Government Polytechnic College, Perinthalmanna. `master` branch of this repo will be directly published to the primary url. 
+This repo is made for development of Grievance redressal system for Government Polytechnic College, Perinthalmanna. `master` branch of this repo will be directly published to the primary url.
 
 ## 🏛️ About the institution
+
 Government Polytechnic College Perinthalmanna is one of the leading institutions of its kind in Kerala. Academically and otherwise its position in the state is unchallenged. Activities focusing on the result enhancement and the overall development of the students to make them excel in their respective fields are remarkable. The college has a rich tradition to look back. The present is praiseworthy, so the future has to be envisioned in the light of the glorious past and the meritorious present
+
 ### 👀 Vision
+
 To be a centre of excellence to mould technically competent engineers for industry expertise and social development.
+
 ### 🎯 Mission
+
 1. Impart quality technical education and skills to develop engineering professionals to meet the needs of industry and society.
 2. Facilitate professional interactions between industry and engineers and to promote innovation and entrepreneurship
 3. Inculcate moral values and life ethics in engineering professionals to serve the society.
@@ -29,7 +34,8 @@ When you're done, submit a pull request and for one of the maintainers to check 
 All submissions, including submissions by project members, require review.
 
 The primary maintainers, though, are:
-  - [@amjed-ali-k](https://github.com/amjed-ali-k)
+
+- [@amjed-ali-k](https://github.com/amjed-ali-k)
 
 ## 🚀 Quick start
 
@@ -59,6 +65,7 @@ The primary maintainers, though, are:
     Open the `gptc-perinthalmanna` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
 
 ## 🧔 Maintainers
+
 <a href="https://github.com/amjed-ali-k/grs-frontend/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=amjed-ali-k/grs-frontend" />
 </a>

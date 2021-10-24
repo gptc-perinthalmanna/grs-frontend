@@ -24,7 +24,8 @@ const NewPostPage = () => {
               <Card.Body>
                 <h3>Try to remember while entering grievience</h3>
                 <p>
-                  There are several rules to follow while creating a new grievience post.
+                  There are several rules to follow while creating a new
+                  grievience post.
                 </p>
               </Card.Body>
             </Card>
