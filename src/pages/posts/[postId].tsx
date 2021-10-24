@@ -17,7 +17,7 @@ const SkeltonLine = () => <div className="skeleton-line"></div>
 
 const ViewPostPage = ({ params }) => {
   // Check user is Admin
-  const isAdmin = adminRoles.includes(getCurrentUser().type)
+  const isAdmin = adminRoles.includes(getCurrentUser()?.type)
 
   const [post, setPost] = useState<Post>(() => null)
   const [newResponseShow, setNewResponseShow] = useState(false)
@@ -54,11 +54,11 @@ const ViewPostPage = ({ params }) => {
 
   return (
     <Layout>
-      <Seo title={`Grievance - ${post_id.slice(0, 5)}...`} />
+      <Seo title={`Grievance - ${post_id?.slice(0, 5)}...`} />
       <Container fluid="xl" className="page-body">
         <PageHeader
           preTitle="Dashboard / View Grievances"
-          title={`${post_id.slice(0, 5)}***${post_id.slice(-5)}`}
+          title={`${post_id?.slice(0, 5)}***${post_id?.slice(-5)}`}
           PrimaryButton={
             <>
               <Button
