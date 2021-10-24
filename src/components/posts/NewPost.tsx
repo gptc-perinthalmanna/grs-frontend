@@ -34,7 +34,9 @@ function NewPostForm() {
         priority,
         content: JSON.stringify(convertToRaw(editor.getCurrentContent())),
       })
-      navigate(`/posts/${data['key']}`)
+      if (typeof window !== 'undefined') {
+        navigate(`/posts/${data['key']}`)
+      }
     } catch (error) {
       setError(true)
       setErrorMessage(
@@ -78,11 +80,12 @@ function NewPostForm() {
       </Col>
 
       <Form.Group className={"border-1"}>
+      {typeof window !== 'undefined' &&
         <Editor
           editorState={editor}
           onEditorStateChange={handleEdit}
           editorClassName="form-control"
-        />
+        /> }
       </Form.Group>
 
       <Form.Group className="my-3" controlId="formBasicCheckbox">

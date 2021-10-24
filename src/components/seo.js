@@ -10,7 +10,13 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-function Seo({ description, lang, meta, title, dark = localStorage.getItem('dark') === 'true' }) {
+function Seo({ description, lang, meta, title, dark=false}) {
+  if (!dark) {
+    if (typeof window !== 'undefined') {
+      dark = localStorage.getItem('dark') === 'true' }
+    }
+    
+  
   const { site } = useStaticQuery(
     graphql`  
       query {

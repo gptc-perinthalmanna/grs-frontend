@@ -14,7 +14,7 @@ import PostsList from "../../components/posts/PostsList"
 import { getCurrentUser } from "../../api/users"
 
 const MyPostsPage = () => {
-  const isAdmin = adminRoles.includes(getCurrentUser().type)
+  const isAdmin = adminRoles.includes(getCurrentUser()?.type)
   const [posts, setPosts] = useState<Post[]>(() => null)
   const [page, setPage] = useState<{
     lastKey: string

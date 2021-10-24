@@ -1,7 +1,9 @@
 import axios from 'axios'
-// axios.defaults.baseURL = 'https://newgrs.deta.dev';
-axios.defaults.baseURL = 'http://localhost:8001';
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+axios.defaults.baseURL = 'https://newgrs.deta.dev';
+// axios.defaults.baseURL = 'http://localhost:8001';
+if (typeof window !== 'undefined') {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
+  }
 
 type Login = {
     access_token: string;

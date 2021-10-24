@@ -15,8 +15,7 @@ interface PostQuery {
 }
 
 const AllPostsPage = () => {
-
-  adminRoles.includes(getCurrentUser().type) ? "" : navigate("/dashboard")
+  useEffect(() => {adminRoles.includes(getCurrentUser()?.type) ? "" : navigate("/dashboard")}, [])
 
   const [posts, setPosts] = useState<Post[]>(() => null)
   const [page, setPage] = useState<{

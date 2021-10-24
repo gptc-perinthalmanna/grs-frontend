@@ -46,7 +46,7 @@ function NewResponse({ postId, close, success}: { postId: string; close: () => v
     setStatus(e.target.value)
   }
 
-  const { type } = getCurrentUser()
+  const currentUser = getCurrentUser()
 
   return (
     <Container>
@@ -68,13 +68,14 @@ function NewResponse({ postId, close, success}: { postId: string; close: () => v
             />
 
             <Form.Group className={"border-1"}>
+            {typeof window !== 'undefined' &&
               <Editor
                 editorState={editor}
                 onEditorStateChange={handleEdit}
                 editorClassName="form-control"
-              />
+              />}
             </Form.Group>
-            {type === "staff" ? (
+            {currentUser?.type === "staff" ? (
               <Col md={6} lg={4} xl={3}>
                 <Form.Group className="my-3" controlId="formBasicPassword">
                   <Form.Label>Change Status</Form.Label>
