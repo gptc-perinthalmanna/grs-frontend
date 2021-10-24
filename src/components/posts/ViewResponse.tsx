@@ -40,11 +40,9 @@ function ViewResponse({
       return <div className="badge bg-pink">Author</div>
     }
     if (user.type === "staff") {
-      return <div className="badge bg-purple">{user.designation}</div>
+      return <div className="badge bg-purple">{user.type}</div>
     }
-    if (user.type === "student") {
-      return <div className="badge bg-purple">Student</div>
-    }
+    return <></>
   }
 
   return (

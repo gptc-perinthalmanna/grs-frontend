@@ -71,5 +71,7 @@ export function logout() {
 
 export async function register(form) {
   console.log(form)
-  return await axios.post("/users/new", form)
+  return await axios.post("/users/new/", form)
 }
+
+

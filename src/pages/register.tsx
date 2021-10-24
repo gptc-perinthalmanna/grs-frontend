@@ -12,7 +12,7 @@ import {
 import { IconCircleCheck, IconUserPlus } from "@tabler/icons"
 import { register } from "../api/users"
 import Seo from "../components/seo"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 
 const schema = [
   "username",
@@ -37,7 +37,6 @@ function registerPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    console.log("Submitted ", form)
     let failed = false
     schema.forEach((element: string) => {
       if (!form.hasOwnProperty(element)) {
@@ -62,6 +61,9 @@ function registerPage() {
     try {
       await register(form)
       setRegisterd(true)
+      setTimeout(() => {
+        navigate('/login')
+      }, 5000);
     } catch ({ response }) {
       setShow(true)
       if (response && response.status === 422) {

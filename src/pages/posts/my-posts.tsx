@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react"
-import { Container, Row, Card, Col, Button } from "react-bootstrap"
+import { Container, Row, Button } from "react-bootstrap"
 import {
-  IconAccessPoint,
-  IconArrowBack,
-  IconCalendarEvent,
-  IconCalendarTime,
-  IconDotsVertical,
+  IconList,
   IconMoodSad,
   IconPlus,
-  IconUser,
 } from "@tabler/icons"
-import { format, parseJSON } from "date-fns"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
-import { getMyPosts, Post } from "../../api/posts"
+import { adminRoles, getMyPosts, Post } from "../../api/posts"
 import { Link } from "gatsby"
 import PageHeader from "../../components/PageHeader"
+import PostsList from "../../components/posts/PostsList"
+import { getCurrentUser } from "../../api/users"
 
 const MyPostsPage = () => {
+  const isAdmin = adminRoles.includes(getCurrentUser().type)
   const [posts, setPosts] = useState<Post[]>(() => null)
   const [page, setPage] = useState<{
     lastKey: string
@@ -57,10 +54,18 @@ const MyPostsPage = () => {
         <PageHeader
           title="Grievance Cell"
           preTitle="Dashboard"
-          SecondaryButton={null}
+          SecondaryButton={isAdmin ? <Link to="/posts/all-posts">
+          <Button className="d-none d-sm-inline-block">
+            <IconList />
+            All Grievances
+          </Button>
+          <Button className="d-sm-none btn-icon">
+            <IconPlus />
+          </Button>
+        </Link> : null}
           PrimaryButton={
             <Link to="/posts/new-post">
-              <Button className="d-none d-sm-inline-block">
+              <Button className="d-none btn-secondary d-sm-inline-block">
                 <IconPlus />
                 New Grievance
               </Button>
@@ -88,73 +93,7 @@ const MyPostsPage = () => {
               ></div>
             </div>
           )}
-          {posts &&
-            posts.map(post => {
-              return (
-                <Col key={post.key} lg="12">
-                  <Card>
-                    <Card.Body>
-                      <Row>
-                        <Col xs="auto">
-                          <p className="text-muted">
-                            {post.key.slice(0, 3)}**{post.key.slice(-5)}
-                          </p>
-                        </Col>
-                        <Col>
-                          <Link to={`/posts/${post.key}/`}>
-                            <h4>
-                              {post.subject}
-                            </h4>
-                          </Link>
-                        </Col>
-
-                        <Col xs="auto" className="cursor-pointer">
-                          <IconDotsVertical />
-                        </Col>
-                      </Row>
-                      <Row className="align-items-center">
-                        <Col xs="auto">
-                          <div className="badge bg-blue text-capitalize">
-                            {post.status}
-                          </div>
-                        </Col>
-                        {post.responses && (
-                          <Col xs="auto">
-                            <div className="badge bg-green-lt text-capitalize">
-                              {post.responses.length} Responses
-                            </div>
-                          </Col>
-                        )}
-                          <Col xs="auto" className="text-muted">
-                          <IconCalendarEvent />
-                          <span>
-                            {" "}
-                            Posted : {format(parseJSON(post.published), "p PP")}
-                          </span>
-                        </Col>
-                        {post.modified.slice(0, -5) !==
-                        post.published.slice(0, -5) ? (
-                          <Col xs="auto" className="text-muted">
-                            <IconCalendarTime /> Updated :{" "}
-                            <span>
-                              {format(parseJSON(post.modified), "p PP")}
-                            </span>
-                          </Col>
-                        ) : (
-                          <></>
-                        )}
-                      
-
-                        <Col xs="auto" className="text-muted">
-                          <IconUser />
-                          <span> {post.authorName}</span>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              )
-            })}
+          <PostsList posts={posts} />
 
           {page && page.lastKey && !loadingMore ? (
             <Button onClick={handleLoadMore}>Load More</Button>
@@ -175,7 +114,7 @@ const MyPostsPage = () => {
                       textAlign: "center",
                     }} />
               </div>
-              <div>No Greivances found in DB</div>
+              <div>You don't created any Grievances yet.</div>
             </div>
           )}
         </Row>

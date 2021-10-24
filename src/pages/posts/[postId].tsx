@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Container, Row, Card, Col, Button } from "react-bootstrap"
-import { IconArrowBack, IconPlus } from "@tabler/icons"
+import { IconArrowBack, IconBasket, IconPlus, IconTrash } from "@tabler/icons"
 import { format, parseJSON } from "date-fns"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
@@ -8,13 +8,17 @@ import ViewPost from "../../components/posts/ViewPost"
 import ViewResponses from "../../components/posts/ViewResponse"
 import NewResponse from "../../components/posts/NewResponse"
 import UserCard from "../../components/common/UserCard"
-import { getPost, Post } from "../../api/posts"
-import { Link } from "gatsby"
+import { adminRoles, deletePost, getPost, Post } from "../../api/posts"
 import PageHeader from "../../components/PageHeader"
+import { getCurrentUser } from "../../api/users"
+import { navigate } from "gatsby"
 
 const SkeltonLine = () => <div className="skeleton-line"></div>
 
 const ViewPostPage = ({ params }) => {
+  // Check user is Admin
+  const isAdmin = adminRoles.includes(getCurrentUser().type)
+
   const [post, setPost] = useState<Post>(() => null)
   const [newResponseShow, setNewResponseShow] = useState(false)
   const post_id = params.postId
@@ -28,6 +32,15 @@ const ViewPostPage = ({ params }) => {
   }, [])
 
   const handleNewResponseSuccess = e => fetchPost()
+
+  const handleDelete =  async() => {
+    try {
+     const res = await deletePost(post_id)
+     navigate('/dashboard')
+    } catch (error) {
+      
+    }
+  }
 
   const Skelton = () => (
     <>
@@ -104,11 +117,11 @@ const ViewPostPage = ({ params }) => {
                     HrChange = () => (
                       <div className="hr-text hr-text-right mt-1 mb-2">
                         <span>
-                          Status changed from {" "}
+                          Status changed from{" "}
                           <span className="text-danger">
                             {response.statusChange.prev}
-                          </span> {" "}
-                          to {" "}
+                          </span>{" "}
+                          to{" "}
                           <span className="text-success">
                             {response.statusChange.to}
                           </span>
@@ -137,53 +150,67 @@ const ViewPostPage = ({ params }) => {
             </Row>
           </Col>
           <Col md="5" lg="4" className="h-100">
-            <Card>
-              <Card.Body>
-                <Row>
-                  <Col sm="12">
-                    <h3>Id</h3>
-                    <p>{post_id}</p>
-                  </Col>
-                  <Col sm="12">
-                    <h3>Status</h3>
-                    {post ? (
-                      <p>{post.status.toUpperCase()}</p>
-                    ) : (
-                      <SkeltonLine />
-                    )}
-                  </Col>
-                  <Col sm="12">
-                    <h3>Priority</h3>
-                    {post ? (
-                      <p>{post.priority.toUpperCase()}</p>
-                    ) : (
-                      <SkeltonLine />
-                    )}
-                  </Col>
-                  <Col sm="12">
-                    <h3>Posted on</h3>
-                    {post ? (
-                      <p>{format(parseJSON(post.published), "p PPPP")}</p>
-                    ) : (
-                      <SkeltonLine />
-                    )}
-                  </Col>
-                  <Col sm="12">
-                    <h3>Posted by</h3>
-                    <UserCard userId={"dd1fbe27-504a-4e41-ad55-3df129976842"} />
-                  </Col>
-                  <Col sm="12">
-                    <hr />
-                    <span className="badge bg-orange"></span>
-                    <span className="badge bg-yellow"></span>
-                    <span className="badge bg-lime"></span>
-                    {post && post.responses && (
-                      <p>Total {post.responses.length} Responses.</p>
-                    )}
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            <Row className="row-deck row-cards">
+              <Col xs="12">
+                <Card>
+                  <Card.Body>
+                    <Row>
+                      <Col sm="12">
+                        <h3>Id</h3>
+                        <p>{post_id}</p>
+                      </Col>
+                      <Col sm="12">
+                        <h3>Status</h3>
+                        {post ? (
+                          <p>{post.status.toUpperCase()}</p>
+                        ) : (
+                          <SkeltonLine />
+                        )}
+                      </Col>
+                      <Col sm="12">
+                        <h3>Priority</h3>
+                        {post ? (
+                          <p>{post.priority.toUpperCase()}</p>
+                        ) : (
+                          <SkeltonLine />
+                        )}
+                      </Col>
+                      <Col sm="12">
+                        <h3>Posted on</h3>
+                        {post ? (
+                          <p>{format(parseJSON(post.published), "p PPPP")}</p>
+                        ) : (
+                          <SkeltonLine />
+                        )}
+                      </Col>
+                      <Col sm="12">
+                        <h3>Posted by</h3>
+                        {post && <UserCard userId={post.author} />}
+                      </Col>
+                      <Col sm="12">
+                        <hr />
+                        <span className="badge bg-orange"></span>
+                        <span className="badge bg-yellow"></span>
+                        <span className="badge bg-lime"></span>
+                        {post && post.responses && (
+                          <p>Total {post.responses.length} Responses.</p>
+                        )}
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </Col>
+
+              {isAdmin && (
+                <Col xs="12">
+                  <Card>
+                    <Card.Body>
+                      <Button onClick={handleDelete} className="btn-sm btn-danger" ><IconTrash />Delete this Grievance</Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              )}
+            </Row>
           </Col>
         </Row>
       </Container>

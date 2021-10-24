@@ -35,7 +35,7 @@ function Seo({ description, lang, meta, title, dark = localStorage.getItem('dark
       }}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      bodyAttributes={dark && { class: `theme-dark` }}
+      bodyAttributes={dark ? { class: `theme-dark` } : {}}
       meta={[
         {
           name: `description`,

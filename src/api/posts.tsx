@@ -13,6 +13,16 @@ type StatusChange = {
     to: PostStatus;
 }
 
+export const adminRoles = ['staff'] 
+
+export enum PostPriority {
+    veryLow = 'veryLow',
+    low = 'low',
+    medium = 'medium',
+    high = 'high',
+    important = 'important',
+}
+
 export enum PostStatus  {
     draft = 'draft',
     open = 'open',
@@ -95,4 +105,12 @@ export async function submitNewResponse(data) {
 
 export async function getMyPosts(key = null) {
     return axios.get<PostsList>('/posts/me/', {params: {key}})
+}
+
+export async function getAllPosts(query: {} = null, last_key: string = null){
+    return await axios.post<PostsList>("/posts/all/",  {last_key, query})
+  }
+
+export async function deletePost(key: string) {
+    return await axios.delete(`/posts/${key}`)
 }
