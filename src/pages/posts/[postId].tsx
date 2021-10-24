@@ -10,6 +10,7 @@ import NewResponse from "../../components/posts/NewResponse"
 import UserCard from "../../components/common/UserCard"
 import { getPost, Post } from "../../api/posts"
 import { Link } from "gatsby"
+import PageHeader from "../../components/PageHeader"
 
 const SkeltonLine = () => <div className="skeleton-line"></div>
 
@@ -40,44 +41,30 @@ const ViewPostPage = ({ params }) => {
 
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo title={`Grievance - ${post_id.slice(0, 5)}...`} />
       <Container fluid="xl" className="page-body">
-        <div className="page-header mb-4">
-          <Row className="align-items-center">
-            <Col>
-              <div className="page-pretitle">Grievance Cell</div>
-              <h2 className="page-title">
-                View Grievance / {post_id.slice(0, 5)}***{post_id.slice(-5)}
-              </h2>
-            </Col>
-            <Col className="col-auto ms-auto">
-              <div className="btn-list">
-                <Button
-                  onClick={() => setNewResponseShow(true)}
-                  className="d-none d-sm-inline-block"
-                >
-                  <IconPlus />
-                  New Response
-                </Button>
-                <Button
-                  onClick={() => setNewResponseShow(true)}
-                  className="d-sm-none btn-icon"
-                >
-                  <IconPlus />
-                </Button>
-                <Link to="/my-posts">
-                  <Button className="d-none d-sm-inline-block">
-                    <IconArrowBack />
-                    Back to Dashboard
-                  </Button>
-                  <Button className="d-sm-none btn-icon">
-                    <IconArrowBack />
-                  </Button>
-                </Link>
-              </div>
-            </Col>
-          </Row>
-        </div>
+        <PageHeader
+          preTitle="Dashboard / View Grievances"
+          title={`${post_id.slice(0, 5)}***${post_id.slice(-5)}`}
+          PrimaryButton={
+            <>
+              <Button
+                onClick={() => setNewResponseShow(true)}
+                className="d-none d-sm-inline-block"
+              >
+                <IconPlus />
+                New Response
+              </Button>
+              <Button
+                onClick={() => setNewResponseShow(true)}
+                className="d-sm-none btn-icon"
+              >
+                <IconPlus />
+              </Button>
+            </>
+          }
+        />
+
         <Row className="row-deck row-cards">
           <Col md="7" lg="8">
             <Row className="row-deck row-cards">

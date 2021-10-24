@@ -10,11 +10,12 @@ import {
   IconUser,
 } from "@tabler/icons"
 import { format, parseJSON } from "date-fns"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import { getMyPosts, Post } from "../api/posts"
-import { capitalizeFirstLetter } from "../utils/func"
+import Layout from "../../components/layout"
+import Seo from "../../components/seo"
+import { getMyPosts, Post } from "../../api/posts"
+import { capitalizeFirstLetter } from "../../utils/func"
 import { Link } from "gatsby"
+import PageHeader from "../../components/PageHeader"
 
 const MyPostsPage = () => {
   const [posts, setPosts] = useState<Post[]>(() => null)
@@ -31,35 +32,16 @@ const MyPostsPage = () => {
     <Layout>
       <Seo title="My Grievances" />
       <Container fluid="xl" className="page-body">
-        <div className="page-header mb-4">
-          <Row className="align-items-center">
-            <Col>
-              <div className="page-pretitle">Grievance Cell</div>
-              <h2 className="page-title">My Grievances</h2>
-            </Col>
-            <Col className="col-auto ms-auto">
-              <div className="btn-list">
-                <Link to="/new-post" >
+        <PageHeader title="Grievance Cell" preTitle="Dashboard" PrimaryButton={<Link to="/posts/new-post" >
                     <Button className="d-none d-sm-inline-block">
                   <IconPlus />
                   New Grievance
-
                     </Button>
-                </Link>
                 <Button className="d-sm-none btn-icon">
                   <IconPlus />
                 </Button>
-                <Button href="" className="d-none d-sm-inline-block">
-                  <IconArrowBack />
-                  Back to Dashboard
-                </Button>
-                <Button href="" className="d-sm-none btn-icon">
-                  <IconArrowBack />
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </div>
+                </Link>} />
+    
         <Row className="row-deck row-cards">
           {posts &&
             posts.map(post => {

@@ -31,6 +31,17 @@ export type User = {
   updatedAt: string
 }
 
+type Login = {
+  access_token: string;
+  token_type: string;
+}
+
+export async function login(form:FormData) {
+  const {data: {access_token}} = await axios.post<Login>('/token', form)
+    localStorage.setItem('token', access_token)
+    return access_token
+}
+
 export async function getUserFromId(userid: string) {
   try {
     const { data } = await axios.get<BasicUser>(`/users/user/${userid}/`)

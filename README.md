@@ -47,7 +47,7 @@ The primary maintainers, though, are:
 
     ```shell
     cd grs-frontend/
-    gatsby develop
+    yarn start
     ```
 
 1.  **Open the source code and start editing!**
