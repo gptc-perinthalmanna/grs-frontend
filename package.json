@@ -33,6 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "node-sass": "^6.0.1",
     "commitlint": "^11.0.0",
     "commitlint-config-gitmoji": "^2.2.5",
     "husky": "^7.0.2",
