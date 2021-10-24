@@ -45,11 +45,17 @@ export type Post = {
     status: PostStatus;
     author: string;
     authorName?: string;
-    published: Date;
-    modified: Date;
+    published: string;
+    modified: string;
     deleted: boolean;
     visible: boolean;
     responses: Response[];
+}
+
+export type PostsList = {
+    posts: Post[];
+    last_key: string
+    count: number
 }
 
 export async function fetchToken(){
@@ -87,6 +93,6 @@ export async function submitNewResponse(data) {
     return axios.post('/posts/response/new/', data)
 }
 
-export async function getMyPosts() {
-    return axios.get<Post[]>('/posts/me/')
+export async function getMyPosts(key = null) {
+    return axios.get<PostsList>('/posts/me/', {params: {key}})
 }

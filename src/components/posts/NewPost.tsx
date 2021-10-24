@@ -4,6 +4,7 @@ import { Editor, EditorState } from "react-draft-wysiwyg"
 import { convertToRaw } from 'draft-js';
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
 import { submitNewPost } from "../../api/posts"
+import { navigate } from "gatsby";
 
 function NewPostForm() {
   const [editor, setEditor] = useState<EditorState>(() => null)
@@ -28,12 +29,12 @@ function NewPostForm() {
     console.log(`%c Subject ${subject} `, "color: green")
     console.log(`%c Priority ${priority} `, "color: green")
     try {
-      const res = await submitNewPost({
+      const {data} = await submitNewPost({
         subject,
         priority,
         content: JSON.stringify(convertToRaw(editor.getCurrentContent())),
       })
-      console.log("Response", res)
+      navigate(`/posts/${data['key']}`)
     } catch (error) {
       setError(true)
       setErrorMessage(

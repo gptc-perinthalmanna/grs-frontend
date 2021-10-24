@@ -86,7 +86,7 @@ function loginPage() {
                     <Form.Check type="checkbox" label="Remember me" />
                   </Form.Group>
                   <Button variant="primary" type="submit">
-                    Submit
+                    Login
                   </Button>
                 </Form>
               </div>
@@ -101,9 +101,9 @@ function loginPage() {
             <Col xs="auto">
               <Link to="/register">Register new account</Link>
             </Col>
-            <Col xs="auto">
+            {/* <Col xs="auto">
               <Link to="/register">Forgot Password</Link>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

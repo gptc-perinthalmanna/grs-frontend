@@ -321,9 +321,9 @@ function registerPage() {
             <Col xs="auto">
               <Link to="/login">Login to your account</Link>
             </Col>
-            <Col xs="auto">
+            {/* <Col xs="auto">
               <Link to="/login">Forgot Password</Link>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

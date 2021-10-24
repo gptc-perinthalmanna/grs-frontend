@@ -84,7 +84,7 @@ function NewResponse({ postId, close, success}: { postId: string; close: () => v
                     aria-label="veryLow"
                   >
                     {Object.keys(NewPostStatus).map(key => (
-                      <option value={NewPostStatus[key]}>
+                      <option key={key} value={NewPostStatus[key]}>
                         {capitalizeFirstLetter(key)}
                       </option>
                     ))}
