@@ -1,154 +1,89 @@
-import React, { useState } from "react"
-import {
-  Card,
-  Col,
-  Form,
-  Button,
-  Container,
-  Row,
-  Alert,
-  Fade,
-} from "react-bootstrap"
-import { IconCircleCheck, IconUserPlus } from "@tabler/icons"
-import { register } from "../api/users"
-import Seo from "../components/seo"
-import { Link, navigate } from "gatsby"
+import React, {useState} from 'react'
+import { Button, Col, Row, Form } from 'react-bootstrap'
+import { IconUserPlus } from '@tabler/icons'
+import RegisterSuccess from './RegisterSuccess'
+import { register } from '../../api/users'
+import { navigate } from 'gatsby'
 
 const schema = [
-  "username",
-  "email",
-  "first_name",
-  "contact_number",
-  "type",
-  "address",
-  "state",
-  "pin",
-  "password",
-  "repeat_password",
-]
+    "username",
+    "email",
+    "first_name",
+    "contact_number",
+    "type",
+    "address",
+    "state",
+    "pin",
+    "password",
+    "repeat_password",
+  ]
 
-function registerPage() {
-  const [error, setError] = useState<string>(null)
-  const [loading, setLoading] = useState(() => false)
-  const [show, setShow] = useState(() => false)
-  const [form, setForm] = useState({})
-  const [registred, setRegisterd] = useState(false)
+function RegisterNormal({ setLoading }) {
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-    setLoading(true)
-    let failed = false
-    schema.forEach((element: string) => {
-      if (!form.hasOwnProperty(element)) {
-        setShow(true)
-        setError(`${element.replace("_", " ")} field is required.`)
-        failed = true
+    const [error, setError] = useState<string>(null)
+ 
+    const [show, setShow] = useState(() => false)
+    const [form, setForm] = useState({})
+    const [registred, setRegisterd] = useState(false)
+  
+    async function handleSubmit(e) {
+      e.preventDefault()
+      setLoading(true)
+      let failed = false
+      schema.forEach((element: string) => {
+        if (!form.hasOwnProperty(element)) {
+          setShow(true)
+          setError(`${element.replace("_", " ")} field is required.`)
+          failed = true
+          return
+        }
+        if (form[element].length < 4) {
+          setShow(true)
+          setError(`An error in value of ${element.replace("_", " ")}`)
+          failed = true
+          return
+        }
+      })
+  
+      if (failed) {
+        setLoading(false)
         return
       }
-      if (form[element].length < 4) {
+  
+      try {
+        await register(form)
+        setRegisterd(true)
+        setTimeout(() => {
+          navigate("/login")
+        }, 5000)
+      } catch ({ response }) {
         setShow(true)
-        setError(`An error in value of ${element.replace("_", " ")}`)
-        failed = true
-        return
+        if (response && response.status === 422) {
+          console.log(response.data.detail.msg)
+          let errorTexts = ""
+          response.data.detail.forEach(element => {
+            errorTexts += element.msg + ". "
+          })
+          setError(errorTexts)
+        } else if (response && response.status === 401) {
+          setError(response.data.detail)
+        } else setError("An unknown error occured.")
+        setLoading(false)
       }
-    })
-
-    if (failed) {
-      setLoading(false)
-      return
+    }
+  
+    function handleChange(e) {
+      let _form = form
+      _form[e.target.name] = e.target.value
+      setForm(_form)
     }
 
-    try {
-      await register(form)
-      setRegisterd(true)
-      setTimeout(() => {
-        navigate("/login")
-      }, 5000)
-    } catch ({ response }) {
-      setShow(true)
-      if (response && response.status === 422) {
-        console.log(response.data.detail.msg)
-        let errorTexts = ""
-        response.data.detail.forEach(element => {
-          errorTexts += element.msg + ". "
-        })
-        setError(errorTexts)
-      } else if (response && response.status === 401) {
-        setError(response.data.detail)
-      } else setError("An unknown error occured.")
-      setLoading(false)
-    }
-  }
+if (registred) {return (<RegisterSuccess />)}
 
-  function handleChange(e) {
-    let _form = form
-    _form[e.target.name] = e.target.value
-    setForm(_form)
-  }
-
-  if (registred)
     return (
-      <div>
-        <Seo title="Register" />
-        <div className="page page-center">
-          <Container className="container-tight py-4">
-            <div className="text-center mb-4">
-              <img
-                src="/logo.png"
-                style={{ filter: "invert(50%)" }}
-                height={56}
-                alt=""
-              />
-            </div>
-            <Card className="card-md">
-              <Card.Body>
-                <p className="text-center mb-0">
-                  <IconCircleCheck
-                    style={{
-                      height: "100%",
-                      width: "100px",
-                      textAlign: "center",
-                    }}
-                    color="green"
-                  />
-                </p>
-                <h2 className="text-center">Registered Successfully!</h2>
-
-                <Row className="justify-content-center align-items-center">
-                  <Col xs="auto">
-                    <div
-                      className="spinner-border text-blue"
-                      role="status"
-                    ></div>
-                  </Col>
-                  <Col xs="auto">Redirecting to Login Page.</Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          </Container>
-        </div>
-      </div>
-    )
-
-  return (
-    <div>
-      <Seo title="Register" />
-      <div className="page page-center">
-        <Container className="container py-4" style={{ maxWidth: "800px" }}>
-          <div className="text-center mb-4">
-            <img
-              src="/logo.png"
-              style={{ filter: "invert(50%)" }}
-              height={56}
-              alt=""
-            />
-          </div>
-          <Card className="card-md">
-            <Card.Body>
-              <div>
-                <h1 className="text-center mt-2">Register</h1>
-                <hr />
-
+        <>
+               <div>
+               
                 {show && (
                   <div
                     className="alert alert-important alert-danger alert-dismissible"
@@ -312,25 +247,8 @@ function registerPage() {
                   </Row>
                 </Form>
               </div>
-            </Card.Body>
-            {loading && (
-              <div className="progress progress-sm">
-                <div className="progress-bar progress-bar-indeterminate"></div>
-              </div>
-            )}
-          </Card>
-          <Row className="align-items-center justify-content-center mt-3">
-            <Col xs="auto">
-              <Link to="/login">Login to your account</Link>
-            </Col>
-            {/* <Col xs="auto">
-              <Link to="/login">Forgot Password</Link>
-            </Col> */}
-          </Row>
-        </Container>
-      </div>
-    </div>
-  )
+        </>
+    )
 }
 
-export default registerPage
+export default RegisterNormal
