@@ -162,11 +162,11 @@ const ViewPostPage = ({ params }) => {
                       </Col>
                       <Col sm="12">
                         <h3>Status</h3>
-                        {post && <PostStatus status={post.status} />}
+                        <PostStatus status={post?.status} />
                       </Col>
                       <Col sm="12">
                         <h3>Priority</h3>
-                        {post && <PostPriority priority={post.priority} />}
+                       <PostPriority priority={post?.priority} />
                       </Col>
                       <Col sm="12">
                         <h3>Posted on</h3>

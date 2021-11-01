@@ -9,7 +9,7 @@ const colors = {
     important : "red",
 }
 
-function PostPriority({priority}) {
+function PostPriority({priority=null}) {
 
     if(!priority){
         return <div className="skeleton-line"></div>
