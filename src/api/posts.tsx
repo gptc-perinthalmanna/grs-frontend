@@ -1,6 +1,6 @@
 import axios from "axios"
-// axios.defaults.baseURL = "https://newgrs.deta.dev"
-axios.defaults.baseURL = 'http://localhost:8001';
+axios.defaults.baseURL = "https://newgrs.deta.dev"
+// axios.defaults.baseURL = 'http://localhost:8001';
 if (typeof window !== "undefined") {
   axios.defaults.headers.common[
     "Authorization"

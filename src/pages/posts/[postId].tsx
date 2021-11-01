@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Container, Row, Card, Col, Button } from "react-bootstrap"
-import { IconArrowBack, IconBasket, IconPlus, IconTrash } from "@tabler/icons"
+import { IconPlus, IconTrash } from "@tabler/icons"
 import { format, parseJSON } from "date-fns"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
@@ -11,7 +11,10 @@ import UserCard from "../../components/common/UserCard"
 import { adminRoles, deletePost, getPost, Post } from "../../api/posts"
 import PageHeader from "../../components/PageHeader"
 import { getCurrentUser } from "../../api/users"
+import PostStatus from "../../components/posts/fragments/PostStatus"
 import { navigate } from "gatsby"
+import PostPriority from "../../components/posts/fragments/PostPriority"
+
 
 const SkeltonLine = () => <div className="skeleton-line"></div>
 
@@ -159,19 +162,11 @@ const ViewPostPage = ({ params }) => {
                       </Col>
                       <Col sm="12">
                         <h3>Status</h3>
-                        {post ? (
-                          <p>{post.status.toUpperCase()}</p>
-                        ) : (
-                          <SkeltonLine />
-                        )}
+                        {post && <PostStatus status={post.status} />}
                       </Col>
                       <Col sm="12">
                         <h3>Priority</h3>
-                        {post ? (
-                          <p>{post.priority.toUpperCase()}</p>
-                        ) : (
-                          <SkeltonLine />
-                        )}
+                        {post && <PostPriority priority={post.priority} />}
                       </Col>
                       <Col sm="12">
                         <h3>Posted on</h3>

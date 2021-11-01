@@ -3,6 +3,7 @@ import { Row, Card, Col } from "react-bootstrap"
 import { IconCalendarEvent, IconCalendarTime, IconUser } from "@tabler/icons"
 import { format, parseJSON } from "date-fns"
 import { Link } from "gatsby"
+import PostStatus from "./fragments/PostStatus"
 
 function PostsList({ posts }) {
   return (
@@ -31,9 +32,9 @@ function PostsList({ posts }) {
                   </Row>
                   <Row className="align-items-center">
                     <Col xs="auto">
-                      <div className="badge bg-blue text-capitalize">
-                        {post.status}
-                      </div>
+                     
+                        <PostStatus className="mb-0" status={post.status} />
+                     
                     </Col>
                     {post.responses && (
                       <Col xs="auto">
