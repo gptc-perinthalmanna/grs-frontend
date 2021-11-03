@@ -14,8 +14,6 @@ import Seo from "../../components/seo"
 import { Link, navigate } from "gatsby"
 import RegisterNormal from "../../components/auth/RegisterNormal"
 
-
-
 function registerPage() {
   const [loading, setLoading] = useState(() => false)
   return (
@@ -28,25 +26,27 @@ function registerPage() {
               src="/logo.png"
               style={{ filter: "invert(50%)" }}
               height={56}
-              alt=""
+              alt="GRS Logo"
             />
           </div>
           <Card className="card-md">
-            <Card.Header>  <h1 className="text-center mt-2">Register</h1>
-                <hr /> </Card.Header>
+            <Card.Header>
+              {" "}
+              <h1 className="text-center mt-2">Register</h1>
+              <hr />{" "}
+            </Card.Header>
             <Card.Body>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 nav-fill">
-        <Tab eventKey="student" title="Student">
-          
-        </Tab>
-        <Tab eventKey="staff" title="Staff">
-          
-        </Tab>
-        <Tab eventKey="other" title="Other">
-           <RegisterNormal setLoading={setLoading} />
-          
-        </Tab>
-      </Tabs>
+              <Tabs
+                defaultActiveKey="profile"
+                id="uncontrolled-tab-example"
+                className="mb-3 nav-fill"
+              >
+                <Tab eventKey="student" title="Student"></Tab>
+                <Tab eventKey="staff" title="Staff"></Tab>
+                <Tab eventKey="other" title="Other">
+                  <RegisterNormal setLoading={setLoading} />
+                </Tab>
+              </Tabs>
             </Card.Body>
             {loading && (
               <div className="progress progress-sm">
