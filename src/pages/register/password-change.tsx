@@ -10,7 +10,7 @@ function PasswordChangePage() {
   const [show, setShow] = useState(() => false)
   const user = getCurrentUser()
   const [form, setForm] = useState(() => ({
-      username: user.username,
+      username: user?.username,
       password: "",
       new_password: "",
       repeat_password: "",
