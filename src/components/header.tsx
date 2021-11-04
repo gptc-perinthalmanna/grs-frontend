@@ -2,13 +2,26 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
-import { IconPhone, IconAward, IconLogout } from "@tabler/icons"
+import { IconPhone, IconAward, IconLogout, IconHome2, IconToggleLeft } from "@tabler/icons"
 
 import { Nav, Navbar, Container } from "react-bootstrap"
-import { fetchToken } from "../api/posts"
+// import { fetchToken } from "../api/posts"
 import { getCurrentUser, logout } from "../api/users"
 
 const Header = ({ siteTitle }) => {
+
+  let dark = false
+    if (typeof window !== "undefined") {
+      dark = localStorage.getItem("dark") === "true"
+    }
+  const handleDark = (event) => {
+    event.preventDefault()
+    if (typeof window !== "undefined") {
+      localStorage.setItem("dark", !dark ? "true": "false")
+      window.location.reload()
+    }
+  }
+
   const user = getCurrentUser()
   return (
     <React.Fragment>
@@ -21,6 +34,22 @@ const Header = ({ siteTitle }) => {
             <Nav.Item bsPrefix="top-nav" className="d-md-flex d-none me-3">
               <div className="btn-list">
                 {user ? (
+                  <>
+                  <Link
+                  className="btn btn-sm btn-outline-white"
+                  to="/dashboard"
+                >
+                  <IconHome2 size={24} />
+                  Dashboard
+                </Link>
+                <Link
+                  className="btn btn-sm btn-outline-white"
+                  onClick={handleDark}
+                  to="/"
+                >
+                  <IconToggleLeft size={24} />
+                  Switch to {dark ? 'Light' : 'Dark'}
+                </Link>
                   <Link
                     className="btn btn-sm btn-outline-white"
                     onClick={logout}
@@ -28,7 +57,7 @@ const Header = ({ siteTitle }) => {
                   >
                     <IconLogout size={24} />
                     Logout
-                  </Link>
+                  </Link></>
                 ) : (
                   <>
                     <Link

@@ -31,7 +31,7 @@ function loginPage() {
 
   return (
     <div>
-      <Seo title="Login" dark />
+      <Seo title="Login" />
       <div className="page page-center">
         <Container className="container-tight py-4">
           <div className="text-center mb-4">
