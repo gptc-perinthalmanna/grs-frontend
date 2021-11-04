@@ -28,7 +28,7 @@ function registerPage() {
               src="/logo.png"
               style={{ filter: "invert(50%)" }}
               height={56}
-              alt=""
+              alt="GRS Logo"
             />
           </div>
           <Card className="card-md">
