@@ -83,6 +83,7 @@ function NewPostForm() {
             editorState={editor}
             onEditorStateChange={handleEdit}
             editorClassName="form-control"
+            toolbar={{options: ['inline', 'textAlign', 'colorPicker', 'link', 'emoji', 'image', 'remove', 'history'],}}
           />
         )}
       </Form.Group>

@@ -41,7 +41,7 @@ function Seo({ description, lang, meta, title, dark = false }) {
       }}
       title={title}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      bodyAttributes={dark ? { class: `theme-dark` } : {}}
+      bodyAttributes={{ class: `${dark?"theme-dark":" "}` }}
       meta={[
         {
           name: `description`,
