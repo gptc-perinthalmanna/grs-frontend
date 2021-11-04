@@ -16,9 +16,7 @@ const errorUser: BasicUser = {
 
 function UserCard({ userId }) {
   const [user, setUser] = React.useState<BasicUser>(null)
-
   const getData = React.useCallback(async () => {
-    getUserFromId(userId)
     const _user = await getUserFromId(userId)
     if (_user) {
       setUser(_user)

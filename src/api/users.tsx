@@ -59,14 +59,32 @@ export async function login(form: FormData) {
 }
 
 export async function getUserFromId(userid: string) {
+
+  // Implement Cache
+  let user: BasicUser = null
+  let _usersCache = []
+  if (typeof window !== "undefined") {
+    _usersCache = JSON.parse(localStorage.getItem("users")) as BasicUser[]
+    for (const cachedUser of _usersCache){
+      if (cachedUser.key === userid) {
+        return cachedUser
+      }
+    }
+  }
+
   try {
     const { data } = await axios.get<BasicUser>(`/users/user/${userid}/`)
+    if (typeof window !== "undefined") {
+      if (!_usersCache) _usersCache = [data]
+      localStorage.setItem("users", JSON.stringify(_usersCache))
+    }
     return data
   } catch (error) {
     console.log(
       "%c Requested User not found in server 🤡 ",
       "background: #FF0075; color: #EEEEEE"
     )
+
     return false
   }
 }
