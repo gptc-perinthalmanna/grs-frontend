@@ -1,6 +1,11 @@
 import axios from "axios"
-axios.defaults.baseURL = "https://newgrs.deta.dev"
-// axios.defaults.baseURL = 'http://localhost:8001';
+
+if (process.env.NODE_ENV == 'production'){
+  axios.defaults.baseURL = "https://newgrs.deta.dev"
+} else {
+  axios.defaults.baseURL = 'http://localhost:8001';
+}
+
 if (typeof window !== "undefined") {
   axios.defaults.headers.common[
     "Authorization"

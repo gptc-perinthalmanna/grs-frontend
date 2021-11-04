@@ -37,7 +37,8 @@ function registerPage() {
               <hr />
             </Card.Header>
             <Card.Body>
-              <Tabs
+            <RegisterNormal setLoading={setLoading} />
+              {/* <Tabs
                 defaultActiveKey="student"
                 id="uncontrolled-tab-example"
                 className="mb-3 nav-fill"
@@ -51,7 +52,7 @@ function registerPage() {
                 <Tab eventKey="other" title="Other">
                   <RegisterNormal setLoading={setLoading} />
                 </Tab>
-              </Tabs>
+              </Tabs> */}
             </Card.Body>
             {loading && (
               <div className="progress progress-sm">

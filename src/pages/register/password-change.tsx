@@ -1,27 +1,37 @@
-import { Link, navigate } from "gatsby"
-import React, { useState } from "react"
-import { Card, Col, Form, Button, Container, Row, Alert } from "react-bootstrap"
-import { login } from "../api/users"
-import Seo from "../components/seo"
+import { Link } from 'gatsby'
+import React, {useState} from 'react'
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
+import { change_password, getCurrentUser, login } from '../../api/users'
+import Seo from '../../components/seo'
 
-function loginPage() {
-  const [error, setError] = useState<string>(null)
+function PasswordChangePage() {
+    const [error, setError] = useState<string>(null)
   const [loading, setLoading] = useState(() => false)
   const [show, setShow] = useState(() => false)
+  const user = getCurrentUser()
+  const [form, setForm] = useState(() => ({
+      username: user.username,
+      password: "",
+      new_password: "",
+      repeat_password: "",
+  }))
 
   async function handleSubmit(e) {
     e.preventDefault()
     setLoading(true)
-    const fd = new FormData(e.target)
     try {
-      await login(fd)
+        await change_password(form)
+        let fd = new FormData()
+        fd.append('username', form.username)
+        fd.append('password', form.new_password)
+        await login(fd)
       window.location.href = "/"
     } catch ({ response }) {
       setShow(true)
       if (response && response.status === 422) {
         console.log(response.data.detail.msg)
       }
-      if (response && response.status === 401) {
+      if (response && response.status === 406) {
         setError(response.data.detail)
       } else setError("An unknown error occured.")
 
@@ -29,9 +39,15 @@ function loginPage() {
     }
   }
 
+  function handleChange(e) {
+    let _form = form
+    _form[e.target.name] = e.target.value
+    setForm(_form)
+  }
+
   return (
     <div>
-      <Seo title="Login" />
+      <Seo title="Change your password" />
       <div className="page page-center">
         <Container className="container-tight py-4">
           <div className="text-center mb-4">
@@ -44,8 +60,8 @@ function loginPage() {
           </div>
           <Card className="card-md">
             <Card.Body>
-              <div>
-                <h1 className="text-center mt-2">Login</h1>
+              <div className='mb-2 pb-2'>
+                <h1 className="text-center my-2">Change your password</h1>
                 {show && (
                   <div
                     className="alert alert-important alert-danger alert-dismissible"
@@ -66,27 +82,35 @@ function loginPage() {
               <div className="mb-3">
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                      name="username"
-                      type="text"
-                      placeholder="Enter username"
-                    />
-                  </Form.Group>
-
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Current Password</Form.Label>
                     <Form.Control
                       name="password"
                       type="password"
-                      placeholder="Password"
+                      placeholder="Enter username"
+                      onChange={handleChange}
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Remember me" />
+
+                  <Form.Group className="mb-3" controlId="formNewPassword">
+                    <Form.Label>New Password</Form.Label>
+                    <Form.Control
+                      name="new_password"
+                      type="password"
+                      placeholder="Password"
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="RepeatPassword">
+                    <Form.Label>Repeat Password</Form.Label>
+                    <Form.Control
+                      name="repeat_password"
+                      type="password"
+                      placeholder="Password"
+                      onChange={handleChange}
+                    />
                   </Form.Group>
                   <Button variant="primary" type="submit">
-                    Login
+                    Change Password
                   </Button>
                 </Form>
               </div>
@@ -97,18 +121,10 @@ function loginPage() {
               </div>
             )}
           </Card>
-          <Row className="align-items-center justify-content-center mt-3">
-            <Col xs="auto">
-              <Link to="/register">Register new account</Link>
-            </Col>
-            {/* <Col xs="auto">
-              <Link to="/register">Forgot Password</Link>
-            </Col> */}
-          </Row>
         </Container>
       </div>
     </div>
   )
 }
 
-export default loginPage
+export default PasswordChangePage

@@ -1,7 +1,10 @@
 import axios from "axios"
 import jwt_decode from "jwt-decode"
-axios.defaults.baseURL = "https://newgrs.deta.dev"
-// axios.defaults.baseURL = 'http://localhost:8001';
+if (process.env.NODE_ENV == 'production'){
+  axios.defaults.baseURL = "https://newgrs.deta.dev"
+} else {
+  axios.defaults.baseURL = 'http://localhost:8001';
+}
 if (typeof window !== "undefined") {
   axios.defaults.headers.common[
     "Authorization"
@@ -34,6 +37,7 @@ export type User = {
   gender: string
   avatar: string
   designation: string
+  force_password_change: string
   createdAt: string
   updatedAt: string
 }
@@ -86,7 +90,15 @@ export async function register(form) {
   return await axios.post("/users/new/", form)
 }
 
-
 export async function register_custom(form) {
   return await axios.post("/custom/register/", form)
+}
+
+export async function change_password(form: {
+  username: string
+  password: string
+  new_password: string
+  repeat_password: string
+}) {
+  return await axios.put("/users/me/change-password/", form)
 }
