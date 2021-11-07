@@ -22,11 +22,7 @@ axios.interceptors.response.use(null, error => {
   const authenticationError = error.response && error.response.status === 401
 
   if (authenticationError) {
-    window.location.href = "/login"
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("token")
-      navigate("/login")
-    }
+    window.location.href = "/not-authorised"
     return Promise.reject(error)
   }
 

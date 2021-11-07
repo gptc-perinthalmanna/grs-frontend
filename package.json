@@ -5,11 +5,13 @@
   "version": "0.1.0",
   "author": "Amjed Ali K <amjedmgm@gmail.com>",
   "dependencies": {
+    "@sentry/gatsby": "^6.14.1",
     "@tabler/core": "^1.0.0-beta3",
     "@tabler/icons": "^1.41.2",
     "@types/react-draft-wysiwyg": "^1.13.3",
     "axios": "^0.23.0",
     "date-fns": "^2.25.0",
+    "dotenv": "^10.0.0",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "gatsby": "^4.0.0-zz-next.1",
@@ -33,10 +35,10 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "node-sass": "^6.0.1",
     "commitlint": "^11.0.0",
     "commitlint-config-gitmoji": "^2.2.5",
     "husky": "^7.0.2",
+    "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
     "pretty-quick": "^3.1.1"
   },

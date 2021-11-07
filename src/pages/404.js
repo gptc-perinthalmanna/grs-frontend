@@ -8,7 +8,7 @@ import Seo from "../components/seo"
 const NotFoundPage = () => (
   <Layout>
     <Seo title="404: Not found" />
-    <div className="container-tight py-4">
+    <div className="container py-4">
         <div className="empty">
           <div className="empty-header">404</div>
           <p className="empty-title">Oops… You just found an error page</p>
