@@ -1,15 +1,5 @@
-import axios from "axios"
+import axios from "./http"
 import jwt_decode from "jwt-decode"
-if (process.env.NODE_ENV == 'production'){
-  axios.defaults.baseURL = "https://newgrs.deta.dev"
-} else {
-  axios.defaults.baseURL = 'http://localhost:8001';
-}
-if (typeof window !== "undefined") {
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.getItem("token")}`
-}
 
 export type BasicUser = {
   key: string
@@ -92,7 +82,12 @@ export async function getUserFromId(userid: string) {
 export function getCurrentUser() {
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("token")
-    return token ? jwt_decode<User>(token) : null
+    if (token) {
+      try {
+        return token ? jwt_decode<User>(token) : null
+      } catch (error) {
+        return null
+      }}
   }
   return null
 }

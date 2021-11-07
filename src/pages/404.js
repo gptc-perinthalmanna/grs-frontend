@@ -17,7 +17,7 @@ const NotFoundPage = () => (
           </p>
           <div className="empty-action">
             <Link to="/" className="btn btn-primary">
-              Take me home
+             <IconArrowLeft /> Take me home
             </Link>
           </div>
         </div>

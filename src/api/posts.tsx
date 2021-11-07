@@ -1,16 +1,5 @@
-import axios from "axios"
+import axios from "./http"
 
-if (process.env.NODE_ENV == 'production'){
-  axios.defaults.baseURL = "https://newgrs.deta.dev"
-} else {
-  axios.defaults.baseURL = 'http://localhost:8001';
-}
-
-if (typeof window !== "undefined") {
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.getItem("token")}`
-}
 
 type Login = {
   access_token: string
