@@ -2,7 +2,7 @@ import axios from "axios"
 import { navigate } from "gatsby"
 
 if (process.env.NODE_ENV == "production") {
-  axios.defaults.baseURL = "https://newgrs.deta.dev"
+  axios.defaults.baseURL = "https://grs-backend.gptcperinthalmanna.in"
 } else {
   axios.defaults.baseURL = "http://localhost:8001"
 }
@@ -14,15 +14,13 @@ if (typeof window !== "undefined") {
 }
 
 axios.interceptors.response.use(null, error => {
-  const expectedError =
-    error.response &&
-    error.response.status >= 400 &&
-    error.response.status < 500
-
+  const expectedError = error.response && error.response.status >= 400 && error.response.status < 500
   const authenticationError = error.response && error.response.status === 401
 
   if (authenticationError) {
-    window.location.href = "/not-authorised"
+    if(typeof window !== "undefined") {
+      navigate("/not-authorised")
+    }
     return Promise.reject(error)
   }
 
