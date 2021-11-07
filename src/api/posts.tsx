@@ -11,7 +11,7 @@ type StatusChange = {
   to: PostStatus
 }
 
-export const adminRoles = ["staff", "grievance_cell_memeber"]
+export const adminRoles = ["admin", "grievance_cell_memeber"]
 
 export enum PostPriority {
   veryLow = "veryLow",
