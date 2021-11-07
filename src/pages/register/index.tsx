@@ -15,6 +15,7 @@ import { Link, navigate } from "gatsby"
 import RegisterNormal from "../../components/auth/RegisterNormal"
 import RegisterStudent from "../../components/auth/RegisterStudent"
 import RegisterStaff from "../../components/auth/RegisterStaff"
+import Logo from "../../components/auth/Logo"
 
 function registerPage() {
   const [loading, setLoading] = useState(() => false)
@@ -23,14 +24,7 @@ function registerPage() {
       <Seo title="Register" />
       <div className="page page-top">
         <Container className="container py-4" style={{ maxWidth: "800px" }}>
-          <div className="text-center mb-4">
-            <img
-              src="/logo.png"
-              style={{ filter: "invert(50%)" }}
-              height={56}
-              alt="GRS Logo"
-            />
-          </div>
+         <Logo />
           <Card className="card-md">
             <Card.Header>
               <h1 className="text-center mt-2">Register</h1>

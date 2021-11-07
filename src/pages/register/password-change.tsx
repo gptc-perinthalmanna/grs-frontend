@@ -2,6 +2,7 @@ import { Link } from 'gatsby'
 import React, {useState} from 'react'
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap'
 import { change_password, getCurrentUser, login } from '../../api/users'
+import Logo from '../../components/auth/Logo'
 import Seo from '../../components/seo'
 
 function PasswordChangePage() {
@@ -50,14 +51,7 @@ function PasswordChangePage() {
       <Seo title="Change your password" />
       <div className="page page-center">
         <Container className="container-tight py-4">
-          <div className="text-center mb-4">
-            <img
-              src="/logo.png"
-              style={{ filter: "invert(50%)" }}
-              height={56}
-              alt=""
-            />
-          </div>
+         <Logo />
           <Card className="card-md">
             <Card.Body>
               <div className='mb-2 pb-2'>

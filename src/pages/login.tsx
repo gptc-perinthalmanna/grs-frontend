@@ -1,7 +1,9 @@
 import { Link, navigate } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 import React, { useState } from "react"
 import { Card, Col, Form, Button, Container, Row, Alert } from "react-bootstrap"
 import { login } from "../api/users"
+import Logo from "../components/auth/Logo"
 import Seo from "../components/seo"
 
 function loginPage() {
@@ -34,14 +36,7 @@ function loginPage() {
       <Seo title="Login" />
       <div className="page page-center">
         <Container className="container-tight py-4">
-          <div className="text-center mb-4">
-            <img
-              src="/logo.png"
-              style={{ filter: "invert(50%)" }}
-              height={56}
-              alt=""
-            />
-          </div>
+          <Logo />
           <Card className="card-md">
             <Card.Body>
               <div>
