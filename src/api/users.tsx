@@ -49,19 +49,18 @@ export async function login(form: FormData) {
 }
 
 export async function getUserFromId(userid: string) {
-
   // Implement Cache
   let user: BasicUser = null
   let _usersCache = []
   if (typeof window !== "undefined") {
     _usersCache = JSON.parse(localStorage.getItem("users")) as BasicUser[]
     if (_usersCache) {
-    for (const cachedUser of _usersCache){
-      if (cachedUser.key === userid) {
-        return cachedUser
+      for (const cachedUser of _usersCache) {
+        if (cachedUser.key === userid) {
+          return cachedUser
+        }
       }
     }
-  }
   }
 
   try {
@@ -89,7 +88,8 @@ export function getCurrentUser() {
         return token ? jwt_decode<User>(token) : null
       } catch (error) {
         return null
-      }}
+      }
+    }
   }
   return null
 }
