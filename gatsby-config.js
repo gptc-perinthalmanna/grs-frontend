@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `GPTC Perinthalmanna`,
+    title: `GRS GPTC Perinthalmanna`,
     description: `Government Polytechnic College Perinthalmanna is one of the leading institutions of its kind in Kerala.`,
     author: `@amjed-ali-k`,
-    siteUrl: `https://gptcperinthalmanna.in`,
+    siteUrl: `https://grs.gptcperinthalmanna.in`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -27,8 +27,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gptc-perinthalmanna`,
-        short_name: `gptcpmna`,
+        name: `grs-gptc-perinthalmanna`,
+        short_name: `grs-gptcpmna`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,

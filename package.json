@@ -58,10 +58,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/amjed-ali-k/gptc-perinthalmanna"
+    "url": "https://github.com/gptc-perinthalmanna/grs-frontend"
   },
   "bugs": {
-    "url": "https://github.com/amjed-ali-k/gptc-perinthalmanna/issues"
+    "url": "https://github.com/gptc-perinthalmanna/grs-frontend/issues"
   },
   "husky": {
     "hooks": {

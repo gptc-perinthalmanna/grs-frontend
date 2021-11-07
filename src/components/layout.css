@@ -1,8 +1,0 @@
-body {
-  min-height: 100vh;
-}
-
-.theme-dark .logo-transperant{
-  -webkit-filter: brightness(0) invert(1);
-  filter: brightness(0) invert(1);
-}
