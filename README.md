@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.gptcperinthalmanna.in">
-    <img alt="Gatsby" src="https://www.gptcperinthalmanna.in/wp-content/uploads/2018/11/LOGOm.png" />
+    <img alt="Gatsby" src="https://raw.githubusercontent.com/gptc-perinthalmanna/grs-frontend/main/repo-cover.png" />
   </a>
 </p>
 
