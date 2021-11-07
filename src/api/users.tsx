@@ -55,11 +55,13 @@ export async function getUserFromId(userid: string) {
   let _usersCache = []
   if (typeof window !== "undefined") {
     _usersCache = JSON.parse(localStorage.getItem("users")) as BasicUser[]
+    if (_usersCache) {
     for (const cachedUser of _usersCache){
       if (cachedUser.key === userid) {
         return cachedUser
       }
     }
+  }
   }
 
   try {
